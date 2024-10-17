@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/hatira-app/static/css/main.62e522bd.css",
+    "main.js": "/hatira-app/static/js/main.caecd8d1.js",
+    "static/media/back.jpg": "/hatira-app/static/media/back.d9302584a39006f7ebe0.jpg",
+    "static/media/onder_66.png": "/hatira-app/static/media/onder_66.e2398650a216a984345d.png",
+    "index.html": "/hatira-app/index.html",
+    "main.62e522bd.css.map": "/hatira-app/static/css/main.62e522bd.css.map",
+    "main.caecd8d1.js.map": "/hatira-app/static/js/main.caecd8d1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.62e522bd.css",
+    "static/js/main.caecd8d1.js"
+  ]
+}
