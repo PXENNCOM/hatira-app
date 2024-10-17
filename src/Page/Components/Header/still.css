@@ -1,0 +1,56 @@
+.headerContainer{
+    width: 100%;
+    padding: 60px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: url('../../../assets/back.jpg');
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.headerContainer h3{
+    text-align: center;
+    font-size: 16px;
+    width: 80%;
+    margin-bottom: 35px;
+    font-family: "Red Hat Display", sans-serif;
+}
+.headerContainer img{
+    width: 300px;
+    height: 75px;
+}
+
+.play-icon-section{
+    position: absolute;
+    bottom: -30px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.play-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D12A2C;
+    font-size: 30px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

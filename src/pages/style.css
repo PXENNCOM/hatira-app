@@ -1,0 +1,17 @@
+.desc-page-container{
+    width: 100%;
+    padding-left: 30px;
+}
+.desc-page-title{
+    font-size: 35px;
+    margin-bottom: 30px;
+}
+.desc-page-section{
+    width: 95%;
+}
+.desc-page-section p{
+    margin-bottom: 18px;
+}
+.desc-page-section-hedef{
+    width: 58%;
+}

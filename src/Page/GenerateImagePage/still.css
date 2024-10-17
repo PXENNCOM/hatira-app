@@ -1,0 +1,69 @@
+
+.ser-containerr {
+    padding-left: 25px;
+}
+.ser-containerr h1{
+    font-size: 32px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+.ser-containerr p{
+    margin-bottom: 15px;
+    width: 80%;
+}
+.ser-containerr .sertifika-desc{
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: center;
+}
+.ser-containerr .ser-p-desc{
+    color:#D30000 ;
+    font-weight: 600;
+    font-size: 22px;
+    width: 70%;
+    margin-top: 10px;
+}
+
+
+/* From Uiverse.io by Bodyhc */ 
+.search {
+  display: inline-block;
+  position: relative;
+}
+
+.search input[type="text"] {
+  width: 555px;
+  padding: 21px 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.search button[type="submit"] {
+  background-color: #D30000;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 20px 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(100, 33, 33, 0.1);
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: .9s ease;
+  font-size: 15px;
+}
+
+  
+  .search button[type="submit"]:hover {
+    transform: scale(1.1);
+    color: rgb(255, 255, 255);
+    background-color: #D30000;
+  }
+  
+
