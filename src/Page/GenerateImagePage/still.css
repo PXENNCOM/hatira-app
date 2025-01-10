@@ -1,31 +1,47 @@
-
 .ser-containerr {
-    padding-left: 25px;
+  padding-left: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
 }
-.ser-containerr h1{
-    font-size: 32px;
-    margin-bottom: 10px;
-    margin-top: 50px;
+
+.ser-containerr h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  margin-top: 50px;
 }
-.ser-containerr p{
-    margin-bottom: 15px;
-    width: 80%;
+
+.sertifika-desc {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center !important;
+  justify-content: center;
 }
-.ser-containerr .sertifika-desc{
+
+.ser-containerr p {
+  margin-bottom: 15px;
+  text-align: center;
+  width: 60%;
+}
+
+.ser-containerr .sertifika-desc {
   flex-direction: column;
   align-items: baseline;
   justify-content: center;
 }
-.ser-containerr .ser-p-desc{
-    color:#D30000 ;
-    font-weight: 600;
-    font-size: 22px;
-    width: 70%;
-    margin-top: 10px;
+
+.ser-containerr .ser-p-desc {
+  color: #0d5db8;
+  font-weight: 600;
+  font-size: 22px;
+  width: 60%;
+  margin-top: 10px;
 }
 
-
-/* From Uiverse.io by Bodyhc */ 
 .search {
   display: inline-block;
   position: relative;
@@ -33,7 +49,7 @@
 
 .search input[type="text"] {
   width: 555px;
-  padding: 21px 10px;
+  padding: 21px 20px;
   border: none;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -45,7 +61,7 @@ input:focus {
 }
 
 .search button[type="submit"] {
-  background-color: #D30000;
+  background-color: #0d5db8;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -59,11 +75,109 @@ input:focus {
   font-size: 15px;
 }
 
-  
-  .search button[type="submit"]:hover {
-    transform: scale(1.1);
-    color: rgb(255, 255, 255);
-    background-color: #D30000;
-  }
-  
+.search button[type="submit"]:hover {
+  transform: scale(1.1);
+  color: rgb(255, 255, 255);
+  background-color: #D30000;
+}
 
+/* Tablet için Media Query (768px'e kadar) */
+@media screen and (max-width: 768px) {
+  .ser-containerr {
+    margin-top: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .ser-containerr h1 {
+    font-size: 28px;
+    margin-top: 30px;
+  }
+
+  .ser-containerr p,
+  .ser-containerr .ser-p-desc {
+    width: 80%;
+  }
+
+  .ser-containerr .ser-p-desc {
+    font-size: 20px;
+  }
+
+  .search input[type="text"] {
+    width: 400px;
+    padding: 18px 15px;
+  }
+
+  .search button[type="submit"] {
+    padding: 17px 30px;
+  }
+}
+
+/* Mobil için Media Query (480px'e kadar) */
+@media screen and (max-width: 480px) {
+  .ser-containerr {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .ser-containerr h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .ser-containerr p,
+  .ser-containerr .ser-p-desc {
+    font-size: 14px;
+    width: 90%;
+  }
+
+  .ser-containerr .ser-p-desc {
+    font-size: 18px;
+  }
+
+  .search input[type="text"] {
+    width: 280px;
+    padding: 20px 12px;
+    font-size: 13px;
+  }
+
+  .search button[type="submit"] {
+    padding: 20px 20px;
+    font-size: 13px;
+  }
+}
+
+/* Küçük mobil cihazlar için Media Query (320px'e kadar) */
+@media screen and (max-width: 320px) {
+  .ser-containerr {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .ser-containerr h1 {
+    font-size: 25px;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .ser-containerr p,
+  .ser-containerr .ser-p-desc {
+    width: 90%;
+  }
+
+  .ser-containerr .ser-p-desc {
+    font-size: 18px;
+  }
+
+  .search input[type="text"] {
+    width: 250px;
+    padding: 20px 12px;
+    font-size: 13px;
+  }
+
+  .search button[type="submit"] {
+    padding: 20px 15px;
+    font-size: 13px;
+  }
+}

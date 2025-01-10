@@ -1,14 +1,12 @@
 import React from 'react'
 import Header from '../Components/Header/İndex'
-import OnderNavigation from '../Components/OnderNavigation/OnderNavigation'
-import Mobilİmageİnput from '../GenerateImagePage/mobilgenerateimageİnput'
 import '../../App.css'
+import Generateİmageİnput from '../GenerateImagePage/Generateİmageİnput'
 const HomePage = () => {
   return (
     <div className='homeContainer'>
       <Header />
-      <OnderNavigation />
-      <Mobilİmageİnput />
+      <Generateİmageİnput />
     </div>
   )
 }

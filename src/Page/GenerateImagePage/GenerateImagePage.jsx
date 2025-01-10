@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { Share, Download } from 'lucide-react';
+import { Share, Download, Camera, RefreshCw } from 'lucide-react';
 
 import './generateimage.css'
 
 const GenerateImagePage = () => {
   const { name } = useParams();
-  const [generatedImages, setGeneratedImages] = useState([null, null, null, null]);
+  const [generatedImages, setGeneratedImages] = useState([null, null]);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(0);
-  const canvasRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
-  const backgroundImageSrcs = ['../assets/imamhatiplilerhaftası_hatıra.jpg', '../assets/imamhatiplilerhaftası_hatıra2.jpg', '../assets/imamhatiplilerhaftası_hatıra3.jpg', '../assets/imamhatiplilerhaftası_hatıra4.jpg'];
-  const textColors = ['#343434', '#fff', '#3E3B4E', '#603814'];
+  const canvasRefs = [useRef(null), useRef(null)];
+  const backgroundImageSrcs = ['/assets/hatirakartı.png', '/assets/hatirakartıı.png'];
+   const textColors = ['#343434', '#fff', '#3E3B4E', '#603814'];
 
   useEffect(() => {
     const generateImages = async () => {
@@ -42,16 +42,16 @@ const GenerateImagePage = () => {
           ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
           // İsim için
-          ctx.font = '400 65px "Archivo Black", sans-serif';
+          ctx.font = '400 195px "Archivo Black", sans-serif';
           ctx.fillStyle = textColors[index];
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
 
-          const decodedName = decodeURIComponent(name);
+          const decodedName = decodeURIComponent(name).toUpperCase();
           const words = decodedName.split(' ');
           
           const fontSize = 62;
-          const lineHeight = fontSize * 1.1; // Line height'ı font boyutunun 1.2 katı olarak ayarlıyoruz
+          const lineHeight = fontSize * 3.5; // Line height'ı font boyutunun 1.2 katı olarak ayarlıyoruz
           
           let lines = [];
           if (words.length >= 3) {
@@ -61,7 +61,7 @@ const GenerateImagePage = () => {
           }
 
           const totalTextHeight = lines.length * lineHeight;
-          let startY = (canvas.height * 0.62) - (totalTextHeight / 2) + (fontSize / 2);
+          let startY = (canvas.height * 0.77) - (totalTextHeight / 2) + (fontSize / 2);
 
           lines.forEach((line, i) => {
             const y = startY + (i * lineHeight);
@@ -124,41 +124,127 @@ const GenerateImagePage = () => {
   }
 
   return (
-    <div className="generate-image-container">
-      <h1 className="generate-image-title">İmam Hatipler Haftası Hatırası</h1>
-      {canvasRefs.map((ref, index) => (
-        <canvas key={index} ref={ref} style={{ display: 'none' }} />
-      ))}
-      {step < 3 ? (
-        <div className="loading-container">
-          <div className="loading-bar">
-            <div className="loading-progress" style={{width: `${(step / 3) * 100}%`}}></div>
+    <div className="app-container">
+      {/* Header Section */}
+      <header className="app-header">
+        <div className="header-content">
+          <img 
+            src="https://www.ulastirmamemursen.org.tr/images/memursen.png" 
+            alt="Logo" 
+            className="header-logo" 
+          />
+          <div className="header-text">
+            <h1 className="header-title">Hatıra Oluştur</h1>
+            <p className="header-subtitle">ULAŞTIRMA MEMURSEN</p>
           </div>
-          <p className="loading-text">
-            {step === 1 ? 'Hatıran hazırlanıyor...' : 'Adınız Hatıraya yazılıyor...'}
-          </p>
         </div>
-      ) : generatedImages.every(img => img !== null) ? (
-        <div className="images-container">
-          {generatedImages.map((image, index) => (
-            <div key={index} className="image-container">
-              <img src={image} alt={`Oluşturulan hatıra ${index + 1}`} className="certificate-image" />
-              <div className="button-container">
-                <button onClick={() => shareImage(index)} className="button">
-                  <Share size={16} className="button-icon" />
-                  Paylaş
-                </button>
-                <button onClick={() => downloadImage(index)} className="button download-button">
-                  <Download size={16} className="button-icon" />
-                  İndir
-                </button>
-              </div>
+      </header>
+  
+      <main className="main-content">
+        {/* Error State */}
+        {error ? (
+          <div className="error-container">
+            <div className="error-content">
+              <div className="error-icon">⚠️</div>
+              <h2>Bir Hata Oluştu</h2>
+              <p>{error}</p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="retry-button"
+              >
+                <RefreshCw size={16} />
+                Tekrar Dene
+              </button>
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="loading-text">Hatıralarınız yükleniyor...</div>
-      )}
+          </div>
+        ) : (
+          <>
+            {/* Canvas Elements (Hidden) */}
+            <div style={{ display: 'none' }}>
+              {canvasRefs.map((ref, index) => (
+                <canvas key={index} ref={ref} />
+              ))}
+            </div>
+  
+            {/* Loading State */}
+            {step < 3 ? (
+              <div className="loading-container">
+                <div className="loading-content">
+                  <div className="loading-spinner"></div>
+                  <div className="loading-progress-container">
+                    <div className="loading-bar">
+                      <div 
+                        className="loading-progress" 
+                        style={{width: `${(step / 3) * 100}%`}}
+                      ></div>
+                    </div>
+                    <p className="loading-percentage">
+                      {Math.round((step / 3) * 100)}%
+                    </p>
+                  </div>
+                  <p className="loading-text">
+                    {step === 0 && 'Hazırlanıyor...'}
+                    {step === 1 && 'Hatıranız oluşturuluyor...'}
+                    {step === 2 && 'Son rötuşlar yapılıyor...'}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              /* Generated Images Display */
+              <div className="generation-complete">
+                <div className="complete-header">
+                  <h2 className="complete-title">Hatıranız Hazır! 🎉</h2>
+                  <p className="complete-subtitle">
+                    Hatıra kartınızı paylaşabilir veya indirebilirsiniz
+                  </p>
+                </div>
+                
+                <div className="images-grid">
+                  {generatedImages.map((image, index) => (
+                    <div key={index} className="image-card">
+                      <div className="image-wrapper">
+                        <img 
+                          src={image} 
+                          alt={`Hatıra ${index + 1}`} 
+                          className="generated-image" 
+                        />
+                       
+                      </div>
+                      
+                      <div className="card-actions">
+                        <button 
+                          onClick={() => shareImage(index)} 
+                          className="action-button share-button"
+                        >
+                          <Share size={18} />
+                          <span>Paylaş</span>
+                        </button>
+                        <button 
+                          onClick={() => downloadImage(index)} 
+                          className="action-button download-button"
+                        >
+                          <Download size={18} />
+                          <span>İndir</span>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="generation-info">
+                  <p>
+                    Not: Yüksek kalitede indirmek için "İndir" butonunu kullanınız
+                  </p>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </main>
+  
+      <footer className="app-footer">
+        <p>© 2025 ULAŞTIRMA MEMURSEN - Tüm hakları saklıdır</p>
+    </footer>
     </div>
   );
 };

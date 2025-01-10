@@ -1,4 +1,4 @@
-.headerContainer{
+.headerContainer {
     width: 100%;
     padding: 60px 0;
     display: flex;
@@ -10,20 +10,22 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-}
-.headerContainer h3{
+  }
+  
+  .headerContainer h3 {
     text-align: center;
     font-size: 16px;
     width: 80%;
     margin-bottom: 35px;
     font-family: "Red Hat Display", sans-serif;
-}
-.headerContainer img{
-    width: 300px;
-    height: 75px;
-}
-
-.play-icon-section{
+  }
+  
+  .headerContainer img {
+    width: 500px;
+    height: 120px;
+  }
+  
+  .play-icon-section {
     position: absolute;
     bottom: -30px;
     background-color: #ffffff;
@@ -33,24 +35,102 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.play-icon{
+  }
+  
+  .play-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #D12A2C;
+    color: #0d5db8;
     font-size: 30px;
     animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
+  }
+  
+  @keyframes pulse {
     0% {
-        transform: scale(1);
+      transform: scale(1);
     }
     50% {
-        transform: scale(1.2);
+      transform: scale(1.2);
     }
     100% {
-        transform: scale(1);
+      transform: scale(1);
     }
-}
+  }
+  
+  /* Tablet için Media Query (768px'e kadar) */
+  @media screen and (max-width: 768px) {
+    .headerContainer {
+      padding: 40px 0;
+    }
+  
+    .headerContainer h3 {
+      font-size: 14px;
+      width: 90%;
+      margin-bottom: 25px;
+    }
+  
+    .headerContainer img {
+      width: 400px;
+      height: 100px;
+    }
+  
+    .play-icon-section {
+      width: 60px;
+      height: 60px;
+      bottom: -25px;
+    }
+  
+    .play-icon {
+      font-size: 25px;
+    }
+  }
+  
+  /* Mobil için Media Query (480px'e kadar) */
+  @media screen and (max-width: 480px) {
+    .headerContainer {
+      padding: 30px 0;
+    }
+  
+    .headerContainer h3 {
+      font-size: 13px;
+      width: 95%;
+      margin-bottom: 20px;
+    }
+  
+    .headerContainer img {
+      width: 300px;
+      height: 80px;
+    }
+  
+    .play-icon-section {
+      width: 50px;
+      height: 50px;
+      bottom: -20px;
+    }
+  
+    .play-icon {
+      font-size: 20px;
+    }
+  }
+  
+  /* Küçük mobil cihazlar için Media Query (320px'e kadar) */
+  @media screen and (max-width: 320px) {
+    .headerContainer img {
+      width: 250px;
+      height: 70px;
+    }
+  
+    .headerContainer h3 {
+      font-size: 12px;
+    }
+  
+    .play-icon-section {
+      width: 45px;
+      height: 45px;
+    }
+  
+    .play-icon {
+      font-size: 18px;
+    }
+  }

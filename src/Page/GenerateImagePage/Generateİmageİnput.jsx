@@ -31,7 +31,7 @@ const Generateİmageİnput = () => {
             placeholder="Adınız Soyadınız"
           />
           <button type="submit">
-            Resim Oluştur
+            Hatıra Oluştur
           </button>
           
         </form>
