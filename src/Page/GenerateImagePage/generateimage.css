@@ -167,6 +167,9 @@
   margin-left: 20px;
   margin-top: 50px;
 }
+.generation-info p{
+  margin-bottom: 20px;
+}
 
 /* Footer styles */
 .app-footer {

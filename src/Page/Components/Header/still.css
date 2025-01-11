@@ -1,11 +1,11 @@
 .headerContainer {
     width: 100%;
-    padding: 60px 0;
+    height: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: url('../../../assets/back.jpg');
+    background: url('../../../assets/banner.jpg');
     position: relative;
     background-size: cover;
     background-repeat: no-repeat;
@@ -61,7 +61,7 @@
   /* Tablet için Media Query (768px'e kadar) */
   @media screen and (max-width: 768px) {
     .headerContainer {
-      padding: 40px 0;
+      height: 300px;
     }
   
     .headerContainer h3 {
@@ -87,9 +87,10 @@
   }
   
   /* Mobil için Media Query (480px'e kadar) */
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 520px) {
     .headerContainer {
-      padding: 30px 0;
+      width: 100%;
+      height: 280px;
     }
   
     .headerContainer h3 {
@@ -114,11 +115,10 @@
     }
   }
   
-  /* Küçük mobil cihazlar için Media Query (320px'e kadar) */
-  @media screen and (max-width: 320px) {
-    .headerContainer img {
-      width: 250px;
-      height: 70px;
+  @media screen and (max-width: 390px) {
+    .headerContainer {
+      width: 100%;
+      height: 220px !important;
     }
   
     .headerContainer h3 {

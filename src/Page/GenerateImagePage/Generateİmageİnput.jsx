@@ -16,12 +16,12 @@ const Generateİmageİnput = () => {
 
   return (
       <div className='ser-containerr'>
-        <h1>İmam Hatiplerliler Haftası Hatırası</h1>
+        <h1>ULAŞTIRMA MEMURSEN <br /> Hatıra Kartı</h1>
         <div className='sertifika-desc'>
-          <p>ÖNDER, gençlerimizin eğitim hayatında maddi ve manevi olarak desteklenmesi amacıyla ve imam hatip okullarının hamisi olarak bundan 66 yıl önce yola çıktı. 
-            Dünden bugüne on binlerce gencin yetişmesine, yarınlara adım atmasına destek oldu. Bugün de nitelikli geleceği inşa etmek üzere “Köklerine sadık, geleceğine ÖNDER” olarak yoluna devam ediyor. 
+          <p>
+          Ulaştırma Memur-Sen, ulaştırma hizmet kolundaki emekçilerin refahı için 22 yıldır sahada ve masada her türlü gayreti gösteriyor. Masada, meydanda ve dahi yollarda memurun hakkı için mücadele eden Ulaştırma Çalışanları Memur Sendikası ULAŞTIRMA MEMUR SEN, 22 Yaşında. 
           </p>
-          <p className='ser-p-desc'>Sizler de imam hatip ailesinin bir parçası olarak bu sertifikayı sosyal medya hesaplarınızda “Ben de varım, buradayım” diyebilirsiniz...</p>
+          <p className='ser-p-desc'>Siz de ulaştırma hizmet kolunun genel yetkili ve tek etkili sendikası Ulaştırma Memur-Sen'in bir ferdi olarak bu hatıra kartını sosyal medya hesaplarınızda "Hak, Emek ve Özgürlük Mücadelesinde Ben Varım" yazarak #birliktegüçlüyüz hashtagi ile paylaşabilirsiniz.</p>
         </div>
         <form class="search" onSubmit={handleSubmit}>
           <input

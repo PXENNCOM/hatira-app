@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { Share, Download, Camera, RefreshCw } from 'lucide-react';
+import { Share, Download, RefreshCw } from 'lucide-react';
 
 import './generateimage.css'
 
@@ -13,10 +13,10 @@ const GenerateImagePage = () => {
   const backgroundImageSrcs = ['/assets/hatirakartı.png', '/assets/hatirakartıı.png'];
    const textColors = ['#343434', '#fff', '#3E3B4E', '#603814'];
 
-  useEffect(() => {
+   useEffect(() => {
     const generateImages = async () => {
       try {
-        await document.fonts.load('400 65px "Archivo Black"');
+        await document.fonts.load('900 195px "Montserrat"');
 
         setStep(1); // Hatıran hazırlanıyor
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -42,7 +42,7 @@ const GenerateImagePage = () => {
           ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
           // İsim için
-          ctx.font = '400 195px "Archivo Black", sans-serif';
+          ctx.font = '900 195px "Montserrat"';
           ctx.fillStyle = textColors[index];
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
@@ -51,7 +51,7 @@ const GenerateImagePage = () => {
           const words = decodedName.split(' ');
           
           const fontSize = 62;
-          const lineHeight = fontSize * 3.5; // Line height'ı font boyutunun 1.2 katı olarak ayarlıyoruz
+          const lineHeight = fontSize * 3.5;
           
           let lines = [];
           if (words.length >= 3) {
@@ -234,6 +234,9 @@ const GenerateImagePage = () => {
                 <div className="generation-info">
                   <p>
                     Not: Yüksek kalitede indirmek için "İndir" butonunu kullanınız
+                  </p>
+                  <p>
+                    UYARI: İsminizde Türkçe karakter sorunu varsa sayfayı yenileyiniz!
                   </p>
                 </div>
               </div>
