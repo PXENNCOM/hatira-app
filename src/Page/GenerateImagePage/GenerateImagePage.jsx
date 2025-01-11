@@ -2,27 +2,34 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Share, Download, RefreshCw } from 'lucide-react';
 
-import './generateimage.css'
-
 const GenerateImagePage = () => {
   const { name } = useParams();
   const [generatedImages, setGeneratedImages] = useState([null, null]);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(0);
+  const [progress, setProgress] = useState(0);
   const canvasRefs = [useRef(null), useRef(null)];
   const backgroundImageSrcs = ['/assets/hatirakartı.png', '/assets/hatirakartıı.png'];
-   const textColors = ['#343434', '#fff', '#3E3B4E', '#603814'];
+  const textColors = ['#343434', '#fff', '#3E3B4E', '#603814'];
 
-   useEffect(() => {
+  useEffect(() => {
     const generateImages = async () => {
       try {
         await document.fonts.load('900 195px "Montserrat"');
 
-        setStep(1); // Hatıran hazırlanıyor
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Step 1: İlk yükleme - 0% to 33%
+        setStep(1);
+        for (let i = 0; i <= 33; i++) {
+          setProgress(i);
+          await new Promise(resolve => setTimeout(resolve, 30));
+        }
         
-        setStep(2); // Adınız Hatıraya yazılıyor
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Step 2: İsim yazma - 34% to 66%
+        setStep(2);
+        for (let i = 34; i <= 66; i++) {
+          setProgress(i);
+          await new Promise(resolve => setTimeout(resolve, 30));
+        }
 
         const newGeneratedImages = await Promise.all(canvasRefs.map(async (canvasRef, index) => {
           const canvas = canvasRef.current;
@@ -41,7 +48,6 @@ const GenerateImagePage = () => {
           canvas.height = backgroundImage.height;
           ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
-          // İsim için
           ctx.font = '900 195px "Montserrat"';
           ctx.fillStyle = textColors[index];
           ctx.textAlign = 'center';
@@ -71,8 +77,14 @@ const GenerateImagePage = () => {
           return canvas.toDataURL();
         }));
 
+        // Step 3: Final yükleme - 67% to 100%
+        setStep(3);
+        for (let i = 67; i <= 100; i++) {
+          setProgress(i);
+          await new Promise(resolve => setTimeout(resolve, 20));
+        }
+
         setGeneratedImages(newGeneratedImages);
-        setStep(3); 
       } catch (err) {
         console.error('Error generating images:', err);
         setError(err.message);
@@ -93,20 +105,27 @@ const GenerateImagePage = () => {
 
   const shareImage = async (index) => {
     if (!generatedImages[index]) return;
-
+  
     if (navigator.share) {
       try {
         const blob = await (await fetch(generatedImages[index])).blob();
         const file = new File([blob], `hatira_${index + 1}.png`, { type: 'image/png' });
+        
+        // Paylaşım metni
+        const shareText = "Hak, Emek ve Özgürlük Mücadelesinde Ben de Varım! #birliktegüçlüyüz\n\nUlaştırma Memur-Sen'in 22. Yıl Hatıra Kartı"; 
+  
         await navigator.share({
-          title: 'Oluşturulan Hatıra',
-          text: 'İşte oluşturduğum hatıra!',
+          title: 'Ulaştırma Memur-Sen 22. Yıl Hatıra Kartı',
+          text: shareText,
           files: [file]
         });
       } catch (error) {
         console.error('Paylaşım sırasında hata oluştu:', error);
+        // Paylaşım başarısız olursa yedek olarak indirme işlemi
+        downloadImage(index);
       }
     } else {
+      // Share API desteklenmiyorsa indirme işlemi
       downloadImage(index);
     }
   };
@@ -119,29 +138,20 @@ const GenerateImagePage = () => {
     link.click();
   };
 
-  if (error) {
-    return <div className="error-container">Hata oluştu: {error}</div>;
-  }
-
   return (
     <div className="app-container">
       {/* Header Section */}
       <header className="app-header">
         <div className="header-content">
           <img 
-            src="https://www.ulastirmamemursen.org.tr/images/memursen.png" 
+            src="https://www.ulastirmamemursen.org.tr/images/logo.png" 
             alt="Logo" 
             className="header-logo" 
           />
-          <div className="header-text">
-            <h1 className="header-title">Hatıra Oluştur</h1>
-            <p className="header-subtitle">ULAŞTIRMA MEMURSEN</p>
-          </div>
         </div>
       </header>
   
       <main className="main-content">
-        {/* Error State */}
         {error ? (
           <div className="error-container">
             <div className="error-content">
@@ -159,15 +169,13 @@ const GenerateImagePage = () => {
           </div>
         ) : (
           <>
-            {/* Canvas Elements (Hidden) */}
             <div style={{ display: 'none' }}>
               {canvasRefs.map((ref, index) => (
                 <canvas key={index} ref={ref} />
               ))}
             </div>
   
-            {/* Loading State */}
-            {step < 3 ? (
+            {progress < 100 ? (
               <div className="loading-container">
                 <div className="loading-content">
                   <div className="loading-spinner"></div>
@@ -175,25 +183,24 @@ const GenerateImagePage = () => {
                     <div className="loading-bar">
                       <div 
                         className="loading-progress" 
-                        style={{width: `${(step / 3) * 100}%`}}
+                        style={{width: `${progress}%`}}
                       ></div>
                     </div>
                     <p className="loading-percentage">
-                      {Math.round((step / 3) * 100)}%
+                      {progress}%
                     </p>
                   </div>
                   <p className="loading-text">
-                    {step === 0 && 'Hazırlanıyor...'}
                     {step === 1 && 'Hatıranız oluşturuluyor...'}
-                    {step === 2 && 'Son rötuşlar yapılıyor...'}
+                    {step === 2 && 'Adınız Hatıraya yazılıyor...'}
+                    {step === 3 && 'Bitti sayılır...'}
                   </p>
                 </div>
               </div>
             ) : (
-              /* Generated Images Display */
               <div className="generation-complete">
                 <div className="complete-header">
-                  <h2 className="complete-title">Hatıranız Hazır! 🎉</h2>
+                  <h2 className="complete-title">Hatıranız Hazır!</h2>
                   <p className="complete-subtitle">
                     Hatıra kartınızı paylaşabilir veya indirebilirsiniz
                   </p>
@@ -208,7 +215,6 @@ const GenerateImagePage = () => {
                           alt={`Hatıra ${index + 1}`} 
                           className="generated-image" 
                         />
-                       
                       </div>
                       
                       <div className="card-actions">
@@ -224,7 +230,7 @@ const GenerateImagePage = () => {
                           className="action-button download-button"
                         >
                           <Download size={18} />
-                          <span>İndir</span>
+                          <span>İNDİR</span>
                         </button>
                       </div>
                     </div>
@@ -246,8 +252,8 @@ const GenerateImagePage = () => {
       </main>
   
       <footer className="app-footer">
-        <p>© 2025 ULAŞTIRMA MEMURSEN - Tüm hakları saklıdır</p>
-    </footer>
+        <p>© 2025 ULAŞTIRMA MEMUR-SEN - Tüm hakları saklıdır</p>
+      </footer>
     </div>
   );
 };

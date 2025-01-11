@@ -16,12 +16,12 @@ const Generateİmageİnput = () => {
 
   return (
       <div className='ser-containerr'>
-        <h1>ULAŞTIRMA MEMURSEN <br /> Hatıra Kartı</h1>
+        <h1>ULAŞTIRMA MEMUR-SEN <br /> <span>22. Yıl Hatıra Kartı</span></h1>
         <div className='sertifika-desc'>
           <p>
-          Ulaştırma Memur-Sen, ulaştırma hizmet kolundaki emekçilerin refahı için 22 yıldır sahada ve masada her türlü gayreti gösteriyor. Masada, meydanda ve dahi yollarda memurun hakkı için mücadele eden Ulaştırma Çalışanları Memur Sendikası ULAŞTIRMA MEMUR SEN, 22 Yaşında. 
+          Ulaştırma Memur-Sen, ulaştırma hizmet kolundaki emekçilerin refahı için 22 yıldır sahada ve masada her türlü gayreti gösteriyor. Masada, meydanda ve dahi yollarda memurun hakkı için mücadele eden Ulaştırma Çalışanları Memur Sendikası <span style={{ fontSize: "20px", color:"black", fontWeight:"600"}}>ULAŞTIRMA MEMUR-SEN</span>, <br /><h2>22 YAŞINDA.</h2>
           </p>
-          <p className='ser-p-desc'>Siz de ulaştırma hizmet kolunun genel yetkili ve tek etkili sendikası Ulaştırma Memur-Sen'in bir ferdi olarak bu hatıra kartını sosyal medya hesaplarınızda "Hak, Emek ve Özgürlük Mücadelesinde Ben Varım" yazarak #birliktegüçlüyüz hashtagi ile paylaşabilirsiniz.</p>
+          <p className='ser-p-desc'>Siz de ulaştırma hizmet kolunun genel yetkili ve tek etkili sendikası Ulaştırma Memur-Sen'in bir ferdi olarak bu hatıra kartını sosyal medya hesaplarınızda "Hak, Emek ve Özgürlük Mücadelesinde "Ben de Varım" yazarak #birliktegüçlüyüz hashtagi ile paylaşabilirsiniz.</p>
         </div>
         <form class="search" onSubmit={handleSubmit}>
           <input
