@@ -429,7 +429,7 @@
 
 .sertifika-desc {
   max-width: 800px;
-  margin: 1rem auto;
+  margin: .1rem auto;
   text-align: center;
 }
 
@@ -535,11 +535,11 @@ form.search {
 
 @media screen and (max-width: 480px) {
   .ser-containerr h1 {
-    font-size: 1.75rem;
+    font-size: 1.3rem;
   }
 
   .ser-containerr h1 span {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .ser-containerr h2 {
