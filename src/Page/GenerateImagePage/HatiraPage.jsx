@@ -1,15 +1,34 @@
-import React from 'react';
-import { Share, Download } from 'lucide-react';
+import React, { useState } from 'react';
+import { Share, Download, Copy, Check } from 'lucide-react';
+import Logo from '../../assets/ulastirmalogo.png'
+
 
 const HatiraPage = ({ images, onShare, onDownload }) => {
+  const [copiedIndex, setCopiedIndex] = useState(null);
+  const shareTexts = [
+    "Hak, Emek ve Özgürlük Mücadelesinde Ben de Varım! #birliktegüçlüyüz\n\nUlaştırma Memur-Sen'in 22. Yıl Hatıra Kartı",
+    "22 Yıldır Hak İçin, Emek İçin, Özgürlük İçin Mücadele Ediyoruz! #birliktegüçlüyüz\n\nUlaştırma Memur-Sen'in 22. Yıl Hatıra Kartı",
+    "22 Yıllık Onurlu Mücadelede Ben de Varım! #birliktegüçlüyüz\n\nUlaştırma Memur-Sen'in 22. Yıl Hatıra Kartı"
+  ];
+
+  const handleCopyText = async (index) => {
+    try {
+      await navigator.clipboard.writeText(shareTexts[index]);
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 2000);
+    } catch (err) {
+      console.error('Metin kopyalama hatası:', err);
+    }
+  };
+
   return (
     <div className="app-container">
       <header className="app-header">
         <div className="header-content">
-          <img 
-            src="https://www.ulastirmamemursen.org.tr/images/logo.png" 
-            alt="Logo" 
-            className="header-logo" 
+          <img
+            src={Logo}
+            alt="Logo"
+            className="header-logo"
           />
         </div>
       </header>
@@ -22,28 +41,27 @@ const HatiraPage = ({ images, onShare, onDownload }) => {
               Hatıra kartınızı paylaşabilir veya indirebilirsiniz
             </p>
           </div>
-          
+
           <div className="images-grid">
             {images.map((image, index) => (
               <div key={index} className="image-card">
                 <div className="image-wrapper">
-                  <img 
-                    src={image} 
-                    alt={`Hatıra ${index + 1}`} 
-                    className="generated-image" 
+                  <img
+                    src={image}
+                    alt={`Hatıra ${index + 1}`}
+                    className="generated-image"
                   />
                 </div>
-                
                 <div className="card-actions">
-                  <button 
-                    onClick={() => onShare(index)} 
+                  <button
+                    onClick={() => onShare(index)}
                     className="action-button share-button"
                   >
                     <Share size={18} />
                     <span>Paylaş</span>
                   </button>
-                  <button 
-                    onClick={() => onDownload(index)} 
+                  <button
+                    onClick={() => onDownload(index)}
                     className="action-button download-button"
                   >
                     <Download size={18} />
@@ -53,7 +71,23 @@ const HatiraPage = ({ images, onShare, onDownload }) => {
               </div>
             ))}
           </div>
-          
+
+          <div className="share-texts-container">
+            <h3 className="share-texts-title">Paylaşım için önerilen metinler:</h3>
+            {shareTexts.map((text, index) => (
+              <div key={index} className="share-text-item">
+                <p className="share-text">{text}</p>
+                <button 
+                  onClick={() => handleCopyText(index)}
+                  className="copy-button"
+                  title={copiedIndex === index ? "Kopyalandı!" : "Metni Kopyala"}
+                >
+                  {copiedIndex === index ? <Check size={20} /> : <Copy size={20} />}
+                </button>
+              </div>
+            ))}
+          </div>
+
           <div className="generation-info">
             <p>
               Not: Yüksek kalitede indirmek için "İndir" butonunu kullanınız

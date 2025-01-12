@@ -1,6 +1,7 @@
 // LoadingPage.js
 import React from 'react';
 import { RefreshCw } from 'lucide-react';
+import Logo from '../../assets/ulastirmalogo.png'
 
 const LoadingPage = ({ progress, step, error, onRetry }) => {
   return (
@@ -8,7 +9,7 @@ const LoadingPage = ({ progress, step, error, onRetry }) => {
       <header className="app-header">
         <div className="header-content">
           <img 
-            src="https://www.ulastirmamemursen.org.tr/images/logo.png" 
+            src={Logo}
             alt="Logo" 
             className="header-logo" 
           />

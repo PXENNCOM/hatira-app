@@ -21,8 +21,9 @@
 }
 
 .header-logo {
-  height: 60px;
+  height: 80px;
   width: auto;
+  padding-left: 30px;
 }
 
 .header-text {
@@ -340,7 +341,7 @@
 
 @media screen and (max-width: 768px) {
   .header-logo {
-    height: 50px;
+    height: 70px;
   }
 
   .complete-title {
@@ -354,7 +355,7 @@
 
 @media screen and (max-width: 480px) {
   .header-logo {
-    height: 40px;
+    height: 60px;
   }
 
   .header-title {
@@ -565,3 +566,88 @@ form.search {
 }
 
 
+
+
+
+
+.share-texts-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.share-texts-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  color: #333;
+  text-align: center;
+}
+
+.share-text-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.share-text-item:last-child {
+  margin-bottom: 0;
+}
+
+.share-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #495057;
+  flex: 1;
+  white-space: pre-line;
+}
+
+.copy-button {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: #0d5db8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.copy-button:hover {
+  background-color: #e9ecef;
+}
+
+.copy-button svg {
+  transition: all 0.2s ease;
+}
+
+.copy-button:hover svg {
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 480px) {
+  .share-texts-container {
+    padding: 1rem;
+  }
+  
+  .share-text-item {
+    padding: 0.75rem;
+  }
+  
+  .share-text {
+    font-size: 0.85rem;
+  }
+  
+  .share-texts-title {
+    font-size: 1.1rem;
+  }
+}

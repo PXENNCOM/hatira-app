@@ -81,7 +81,7 @@ const GenerateImagePage = () => {
           const words = decodedName.split(' ');
           
           const fontSize = 62;
-          const lineHeight = fontSize * 1.2;
+          const lineHeight = fontSize * 3.6;
           
           let lines = words.length >= 3 
             ? [words.slice(0, -1).join(' '), words[words.length - 1]]
@@ -126,73 +126,21 @@ const GenerateImagePage = () => {
   const shareImage = async (index) => {
     if (!generatedImages[index]) return;
   
-    const shareText = "Hak, Emek ve Özgürlük Mücadelesinde Ben de Varım! #birliktegüçlüyüz\n\nUlaştırma Memur-Sen'in 22. Yıl Hatıra Kartı";
+    try {
+      const blob = await (await fetch(generatedImages[index])).blob();
+      const file = new File([blob], `hatira_${index + 1}.png`, { type: 'image/png' });
   
-    // Mobil cihaz kontrolü
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  
-    if (navigator.share && isMobile) {
-      try {
-        const blob = await (await fetch(generatedImages[index])).blob();
-        const file = new File([blob], `hatira_${index + 1}.png`, { type: 'image/png' });
-        
-        // İlk olarak sadece metni paylaşmayı dene
-        try {
-          await navigator.share({
-            text: shareText
-          });
-          // Metin paylaşıldıktan sonra resmi paylaş
-          await navigator.share({
-            files: [file]
-          });
-        } catch (textError) {
-          // Eğer ayrı ayrı paylaşım başarısız olursa, hepsini birlikte paylaşmayı dene
-          await navigator.share({
-            title: 'Ulaştırma Memur-Sen 22. Yıl Hatıra Kartı',
-            text: shareText,
-            files: [file]
-          });
-        }
-      } catch (error) {
-        console.error('Paylaşım sırasında hata oluştu:', error);
-        
-        // Alternatif paylaşım yöntemini dene
-        try {
-          // Resmi blob URL'e çevir
-          const blob = await (await fetch(generatedImages[index])).blob();
-          const blobUrl = URL.createObjectURL(blob);
-          
-          // Resmi ve metni panoya kopyala
-          await navigator.clipboard.writeText(shareText);
-          
-          alert('Paylaşım metni panoya kopyalandı! Şimdi resmi indirebilir ve sosyal medyada paylaşabilirsiniz.');
-          
-          // Resmi indir
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = `hatira_${index + 1}.png`;
-          link.click();
-          
-          // Blob URL'i temizle
-          setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
-        } catch (clipboardError) {
-          console.error('Panoya kopyalama başarısız:', clipboardError);
-          downloadImage(index);
-        }
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'Ulaştırma Memur-Sen 22. Yıl Hatıra Kartı'
+        });
       }
-    } else {
-      // Web Share API desteklenmiyorsa veya masaüstünde ise
-      try {
-        // Metni panoya kopyala
-        await navigator.clipboard.writeText(shareText);
-        alert('Paylaşım metni panoya kopyalandı! Şimdi resmi indirebilir ve sosyal medyada paylaşabilirsiniz.');
-        downloadImage(index);
-      } catch (error) {
-        console.error('Panoya kopyalama başarısız:', error);
-        downloadImage(index);
-      }
+    } catch (error) {
+      console.error('Paylaşım sırasında hata oluştu:', error);
     }
   };
+
 
   const downloadImage = (index) => {
     if (!generatedImages[index]) return;
