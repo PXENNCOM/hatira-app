@@ -58,26 +58,33 @@ const GenerateImagePage = () => {
           setProgress(i);
           await new Promise(resolve => setTimeout(resolve, 30));
         }
-
+    
         const newGeneratedImages = await Promise.all(canvasRefs.map(async (canvasRef, index) => {
           const canvas = canvasRef.current;
           if (!canvas) throw new Error(`Canvas element not found for image ${index + 1}`);
-
+    
           const ctx = canvas.getContext('2d');
           if (!ctx) throw new Error(`Unable to get 2D context from canvas for image ${index + 1}`);
-
+    
           const backgroundImage = await loadImage(backgroundImageSrcs[index]);
           
           canvas.width = backgroundImage.width;
           canvas.height = backgroundImage.height;
           ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-
+    
           ctx.font = '900 195px "Montserrat"';
           ctx.fillStyle = textColors[index];
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-
-          const decodedName = decodeURIComponent(name).toUpperCase();
+    
+          // Türkçe karakter düzeltmesi
+          const turkishToUpper = (text) => {
+            return text
+              .replace(/i/g, 'İ')
+              .toUpperCase();
+          };
+    
+          const decodedName = turkishToUpper(decodeURIComponent(name));
           const words = decodedName.split(' ');
           
           const fontSize = 62;
@@ -86,24 +93,24 @@ const GenerateImagePage = () => {
           let lines = words.length >= 3 
             ? [words.slice(0, -1).join(' '), words[words.length - 1]]
             : [decodedName];
-
+    
           const totalTextHeight = lines.length * lineHeight;
           let startY = (canvas.height * 0.77) - (totalTextHeight / 2) + (fontSize / 2);
-
+    
           lines.forEach((line, i) => {
             const y = startY + (i * lineHeight);
             ctx.fillText(line, canvas.width / 2, y);
           });
-
+    
           return canvas.toDataURL();
         }));
-
+    
         setStep(3);
         for (let i = 67; i <= 100; i++) {
           setProgress(i);
           await new Promise(resolve => setTimeout(resolve, 20));
         }
-
+    
         setGeneratedImages(newGeneratedImages);
       } catch (err) {
         console.error('Error generating images:', err);
